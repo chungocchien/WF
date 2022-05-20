@@ -92,7 +92,7 @@ public class forecastController implements Initializable {
 
     public ArrayList<String> cities() {
         Scanner scanner;
-        String url = "D:\\WF-main\\src\\main\\resources\\com\\example\\wf\\city.txt";
+        String url = "src\main\resources\com\example\wf\city.txt";
         ArrayList<String> cities = new ArrayList<>();
         FileInputStream fileInputStream;
         // néu lỗi thoát vòng lặp
