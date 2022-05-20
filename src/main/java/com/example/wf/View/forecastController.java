@@ -11,10 +11,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class forecastController implements Initializable {
     private final String[] DOW = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -82,10 +86,28 @@ public class forecastController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> observableList =
-                FXCollections.observableArrayList("hanoi", "saigon", "halong", "danang", "sydney");
+                FXCollections.observableArrayList(cities());
         city.setItems(observableList);
     }
 
+    public ArrayList<String> cities() {
+        Scanner scanner;
+        String url = "D:\\WF-main\\src\\main\\resources\\com\\example\\wf\\city.txt";
+        ArrayList<String> cities = new ArrayList<>();
+        FileInputStream fileInputStream;
+        // néu lỗi thoát vòng lặp
+        try {
+            fileInputStream = new FileInputStream(url);
+            scanner = new Scanner(fileInputStream);
+            // khi trong file còn tự tiếp tục đọc
+            while (scanner.hasNextLine()) {
+                cities.add(scanner.nextLine());
+            }
+        } catch (IOException ex) {
+            System.out.println(-1);
+        }
+        return cities;
+    }
     private String getIcon(String weather) {
         System.out.println(weather);
         switch (weather) {
